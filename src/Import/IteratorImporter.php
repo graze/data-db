@@ -45,5 +45,6 @@ class IteratorImporter implements IteratorImporterInterface, BuilderAwareInterfa
             list ($sql, $bind) = $this->dialect->getInsertSyntax($this->table, $rows);
             $this->table->getAdapter()->query($sql, $bind);
         }
+        return $this->table;
     }
 }

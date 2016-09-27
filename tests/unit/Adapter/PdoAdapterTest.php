@@ -39,6 +39,13 @@ class PdoAdapterTest extends TestCase
         static::assertEquals('result', $this->adapter->query('some sql', ['array']));
     }
 
+    /**
+     * @param string $sql
+     * @param array  $items
+     * @param array  $options
+     *
+     * @return PDOStatement|MockInterface
+     */
     private function prepare($sql, array $items, array $options = [])
     {
         $statement = m::mock(PDOStatement::class);

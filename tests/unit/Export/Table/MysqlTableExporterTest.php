@@ -81,13 +81,6 @@ class MysqlTableExporterTest extends TestCase
         static::assertInstanceOf(TableExporterInterface::class, $exporter);
     }
 
-    // normal -> export
-    // no file -> get temporary file
-    // no format -> get default format
-    // invalid format -> get default format
-    // table columns non default -> call QueryExporter
-    // table with where -> add where
-
     public function testStandardExport()
     {
         $file = m::mock(LocalFileNodeInterface::class);

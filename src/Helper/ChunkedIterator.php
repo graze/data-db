@@ -38,6 +38,9 @@ class ChunkedIterator extends IteratorIterator
         $this->next();
     }
 
+    /**
+     * @return int|mixed
+     */
     public function key()
     {
         return $this->key;
@@ -45,7 +48,7 @@ class ChunkedIterator extends IteratorIterator
 
     public function next()
     {
-        $this->chunk = array();
+        $this->chunk = [];
         for ($i = 0; $i < $this->chunkSize && parent::valid(); $i++) {
             $this->chunk[] = parent::current();
             parent::next();

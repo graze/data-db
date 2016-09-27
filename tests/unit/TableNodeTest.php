@@ -11,6 +11,9 @@ use Mockery as m;
 
 class TableNodeTest extends TestCase
 {
+    /**
+     * @return TableNode
+     */
     private function makeTable()
     {
         $adapter = m::mock(AdapterInterface::class);

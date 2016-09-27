@@ -61,7 +61,7 @@ class RedshiftFileImporter implements FileImporterInterface, BuilderAwareInterfa
 
         if ($format instanceof JsonFormatInterface) {
             list($sql, $bind) = $this->dialect->getImportFromJson($this->table, $file, $format);
-        } else if ($format instanceof CsvFormatInterface) {
+        } elseif ($format instanceof CsvFormatInterface) {
             list($sql, $bind) = $this->dialect->getImportFromCsv($this->table, $file, $format);
         } else {
             throw new InvalidArgumentException("The format type: " . get_class($format) . " can not be used to import into redshift");

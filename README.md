@@ -7,24 +7,12 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/graze/data-db.svg?style=flat-square)](https://scrutinizer-ci.com/g/graze/data-db)
 [![Total Downloads](https://img.shields.io/packagist/dt/graze/data-db.svg?style=flat-square)](https://packagist.org/packages/graze/data-db)
 
->This is heavily inspired by the skeleton project from [The PHP League](https://github.com/thephpleague/skeleton). With some changes based on our preferences. Thanks to them!
+Library to import and export tables to/from files.
 
->**Note:** Replace `Harry Bragg` `@h-bragg` `harry.bragg@graze.com` `data-db` `Abstracted Database Nodes`, `2016` with their correct values in [README.md](README.md), [CHANGELOG.md](CHANGELOG.md), [CONTRIBUTING.md](CONTRIBUTING.md), [LICENSE.md](LICENSE.md), [composer.json](composer.json), [Dockerfile](Dockerfile) and [travis.yml](.travis.yml) files, then delete this blockquote.
+- Supports: `Pdo`, `Zend1`, and `Zend2` database adapters
+- Supports: `Mysql` and `Redshift` databases currently.
 
->**To use this skeleton project:**
-```shell
-$ git clone --depth=1 git@github.com:graze/skeleton-project.git data-db
-$ cd ./data-db
-$ rm -rf .git
-$ git init
-```
-
->You now have a copy of the files in this repository, in a new git repository with no previous history that can you manipulate and push to other remote repositories.
-
-This is where your description should go, try and limit it to a paragraph or two. It should outline the 'mission' or goals of the project
-to make it clear what the project is trying to achieve and the problems that it solves.
-
-## Install
+### Install
 
 Via Composer
 
@@ -32,11 +20,21 @@ Via Composer
 $ composer require graze/data-db
 ```
 
-## Usage
+### Usage
 
-``` php
-$skeleton = new Graze\Skeleton\Skeleton('big', 'small', 'dog');
-echo $skeleton->sing();
+```php
+$table1 = new Table($mysqlAdapter, 'schema', 'table');
+$file = new LocalFile('/some/path/to/file');
+$exporter = new TableExporter($file, new CsvFormat());
+$exporter->export($table);
+
+// file written to with the contents of $table1 in the default Csv Format
+
+$table2 = new Table($redshiftAdapter, 'schema', 'table');
+$importer = new RedshiftFileImporter($table2);
+$importer->import($file);
+
+// table2 now contains the contents of table1
 ```
 
 ## Change log

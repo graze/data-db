@@ -2,8 +2,6 @@
 
 namespace Graze\DataDb\Dialect;
 
-use Graze\DataDb\Formatter\SyntaxFormatter;
-use Graze\DataDb\Formatter\SyntaxFormatterInterface;
 use Graze\DataDb\TableNodeInterface;
 
 class MysqlDialect extends AbstractDialect
@@ -17,7 +15,10 @@ class MysqlDialect extends AbstractDialect
     }
 
     /**
-     * {@inheritdoc}
+     * @param TableNodeInterface $old
+     * @param TableNodeInterface $new
+     *
+     * @return array
      */
     public function getCreateTableLike(TableNodeInterface $old, TableNodeInterface $new)
     {
@@ -31,7 +32,12 @@ class MysqlDialect extends AbstractDialect
     }
 
     /**
-     * {@inheritdoc}
+     * @param TableNodeInterface $source
+     * @param TableNodeInterface $join
+     * @param string             $on
+     * @param string|null        $where
+     *
+     * @return array
      */
     public function getDeleteTableJoinSoftDelete(
         TableNodeInterface $source,
@@ -65,7 +71,12 @@ class MysqlDialect extends AbstractDialect
     }
 
     /**
-     * @inheritdoc
+     * @param TableNodeInterface $source
+     * @param TableNodeInterface $join
+     * @param string             $on
+     * @param string|null        $where
+     *
+     * @return array
      */
     public function getDeleteTableJoin(
         TableNodeInterface $source,
@@ -92,7 +103,10 @@ class MysqlDialect extends AbstractDialect
     }
 
     /**
-     * {@inheritdoc}
+     * @param TableNodeInterface $table
+     * @param string|null        $where
+     *
+     * @return array [sql, bind]
      */
     public function getDeleteFromTableSoftDelete(TableNodeInterface $table, $where = null)
     {
@@ -115,7 +129,12 @@ class MysqlDialect extends AbstractDialect
     }
 
     /**
-     * {@inheritdoc}
+     * @param TableNodeInterface $table
+     * @param array              $columns
+     * @param array              $primary
+     * @param array              $index
+     *
+     * @return array
      */
     public function getCreateTable(TableNodeInterface $table, array $columns, array $primary, array $index)
     {
@@ -134,7 +153,9 @@ class MysqlDialect extends AbstractDialect
     }
 
     /**
-     * {@inheritdoc}
+     * @param array $column
+     *
+     * @return string
      */
     public function getColumnDefinition(array $column)
     {
@@ -145,7 +166,9 @@ class MysqlDialect extends AbstractDialect
     }
 
     /**
-     * {@inheritdoc}
+     * @param array $key
+     *
+     * @return string
      */
     public function getPrimaryKeyDefinition(array $key)
     {
@@ -153,7 +176,9 @@ class MysqlDialect extends AbstractDialect
     }
 
     /**
-     * {@inheritdoc}
+     * @param array $index
+     *
+     * @return string
      */
     public function getIndexDefinition(array $index)
     {
@@ -161,7 +186,9 @@ class MysqlDialect extends AbstractDialect
     }
 
     /**
-     * {@inheritdoc}
+     * @param TableNodeInterface $table
+     *
+     * @return array [sql, bind]
      */
     public function getDescribeTable(TableNodeInterface $table)
     {
@@ -169,7 +196,9 @@ class MysqlDialect extends AbstractDialect
     }
 
     /**
-     * {@inheritdoc}
+     * @param TableNodeInterface $table
+     *
+     * @return array [sql, bind]
      */
     public function getCreateSyntax(TableNodeInterface $table)
     {

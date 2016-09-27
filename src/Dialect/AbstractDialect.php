@@ -36,7 +36,7 @@ abstract class AbstractDialect implements DialectInterface
      * @param string $syntax
      * @param array  $params
      *
-     * @return mixed
+     * @return string
      */
     protected function format($syntax, array $params = [])
     {
@@ -49,7 +49,10 @@ abstract class AbstractDialect implements DialectInterface
     }
 
     /**
-     * @inheritdoc
+     * @param TableNodeInterface $table
+     * @param string             $column
+     *
+     * @return array
      */
     public function getDropColumn(TableNodeInterface $table, $column)
     {
@@ -63,7 +66,9 @@ abstract class AbstractDialect implements DialectInterface
     }
 
     /**
-     * @inheritdoc
+     * @param TableNodeInterface $table
+     *
+     * @return array
      */
     public function getDoesTableExist(TableNodeInterface $table)
     {
@@ -83,7 +88,10 @@ abstract class AbstractDialect implements DialectInterface
     }
 
     /**
-     * @inheritDoc
+     * @param TableNodeInterface $table
+     * @param string|null        $where
+     *
+     * @return array
      */
     public function getDeleteFromTable(TableNodeInterface $table, $where = null)
     {
@@ -101,7 +109,10 @@ abstract class AbstractDialect implements DialectInterface
     }
 
     /**
-     * @inheritdoc
+     * @param TableNodeInterface $from
+     * @param TableNodeInterface $to
+     *
+     * @return array
      */
     public function getCopyTable(TableNodeInterface $from, TableNodeInterface $to)
     {
@@ -176,7 +187,7 @@ abstract class AbstractDialect implements DialectInterface
      * @param TableNodeInterface $table
      * @param string[]           $rows
      *
-     * @return string
+     * @return array [sql, params]
      */
     public function getInsertSyntax(TableNodeInterface $table, array $rows)
     {

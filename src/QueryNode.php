@@ -7,24 +7,13 @@ use Traversable;
 
 class QueryNode implements QueryNodeInterface
 {
-    /**
-     * @var AdapterInterface
-     */
+    /** @var AdapterInterface */
     private $adapter;
-
-    /**
-     * @ string
-     */
+    /** @var string */
     private $sql;
-
-    /**
-     * @var array
-     */
+    /** @var array */
     private $bind = [];
-
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     private $columns = [];
 
     /**

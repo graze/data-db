@@ -50,6 +50,6 @@ class IteratorImporterTest extends TestCase
                 ->with('sql2', ['bind2'])
                 ->once();
 
-        $importer->import($iterator);
+        static::assertSame($table, $importer->import($iterator));
     }
 }

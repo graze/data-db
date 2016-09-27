@@ -6,7 +6,6 @@ use Aws\Credentials\CredentialsInterface;
 use Graze\DataDb\Formatter\SyntaxFormatterInterface;
 use Graze\DataDb\TableNodeInterface;
 use Graze\DataFile\Format\CsvFormatInterface;
-use Graze\DataFile\Format\JsonFormatInterface;
 use Graze\DataFile\Helper\Builder\BuilderAwareInterface;
 use Graze\DataFile\Modify\Compress\CompressionAwareInterface;
 use Graze\DataFile\Modify\Compress\CompressionFactory;
@@ -46,7 +45,10 @@ class RedshiftDialect extends AbstractDialect implements BuilderAwareInterface
     }
 
     /**
-     * @inheritdoc
+     * @param TableNodeInterface $old
+     * @param TableNodeInterface $new
+     *
+     * @return array [sql, bind]
      */
     public function getCreateTableLike(TableNodeInterface $old, TableNodeInterface $new)
     {
@@ -60,7 +62,12 @@ class RedshiftDialect extends AbstractDialect implements BuilderAwareInterface
     }
 
     /**
-     * @inheritdoc
+     * @param TableNodeInterface $source
+     * @param TableNodeInterface $join
+     * @param string             $on
+     * @param string|null        $where
+     *
+     * @return array [sql, bind]
      */
     public function getDeleteTableJoinSoftDelete(
         TableNodeInterface $source,
@@ -95,7 +102,12 @@ class RedshiftDialect extends AbstractDialect implements BuilderAwareInterface
     }
 
     /**
-     * @inheritdoc
+     * @param TableNodeInterface $source
+     * @param TableNodeInterface $join
+     * @param string             $on
+     * @param string|null        $where
+     *
+     * @return array [sql, bind]
      */
     public function getDeleteTableJoin(
         TableNodeInterface $source,
@@ -124,7 +136,10 @@ class RedshiftDialect extends AbstractDialect implements BuilderAwareInterface
     }
 
     /**
-     * @inheritdoc
+     * @param TableNodeInterface $table
+     * @param string|null               $where
+     *
+     * @return array [sql, bind]
      */
     public function getDeleteFromTableSoftDelete(TableNodeInterface $table, $where = null)
     {
@@ -151,7 +166,12 @@ class RedshiftDialect extends AbstractDialect implements BuilderAwareInterface
     }
 
     /**
-     * @inheritDoc
+     * @param TableNodeInterface $table
+     * @param array              $columns
+     * @param array              $primary
+     * @param array              $index
+     *
+     * @return array [sql, bind]
      */
     public function getCreateTable(TableNodeInterface $table, array $columns, array $primary, array $index)
     {
@@ -170,7 +190,9 @@ class RedshiftDialect extends AbstractDialect implements BuilderAwareInterface
     }
 
     /**
-     * @inheritDoc
+     * @param array $column
+     *
+     * @return string
      */
     public function getColumnDefinition(array $column)
     {
@@ -181,7 +203,9 @@ class RedshiftDialect extends AbstractDialect implements BuilderAwareInterface
     }
 
     /**
-     * @inheritDoc
+     * @param array $key
+     *
+     * @return string
      */
     public function getPrimaryKeyDefinition(array $key)
     {
@@ -189,7 +213,9 @@ class RedshiftDialect extends AbstractDialect implements BuilderAwareInterface
     }
 
     /**
-     * @inheritDoc
+     * @param array $index
+     *
+     * @return string
      */
     public function getIndexDefinition(array $index)
     {
@@ -197,7 +223,9 @@ class RedshiftDialect extends AbstractDialect implements BuilderAwareInterface
     }
 
     /**
-     * @inheritDoc
+     * @param TableNodeInterface $table
+     *
+     * @return array [sql, bind]
      */
     public function getDescribeTable(TableNodeInterface $table)
     {
@@ -214,7 +242,9 @@ class RedshiftDialect extends AbstractDialect implements BuilderAwareInterface
     }
 
     /**
-     * @inheritDoc
+     * @param TableNodeInterface $table
+     *
+     * @return array [sql, bind]
      */
     public function getCreateSyntax(TableNodeInterface $table)
     {
@@ -498,11 +528,11 @@ SQL;
     }
 
     /**
-     * @param TableNodeInterface  $table
-     * @param FileNodeInterface   $file
-     * @param int                 $maxErrors
-     * @param string              $timeFormat
-     * @param string              $dateFormat
+     * @param TableNodeInterface $table
+     * @param FileNodeInterface  $file
+     * @param int                $maxErrors
+     * @param string             $timeFormat
+     * @param string             $dateFormat
      *
      * @return array [sql, bind]
      */

@@ -938,7 +938,6 @@ SQL;
         $this->helper->copyTable($this->table, $from);
     }
 
-
     public function testDefaultExportFormat()
     {
         /** @var CsvFormatInterface $format */
